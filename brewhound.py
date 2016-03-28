@@ -60,5 +60,22 @@ def api_taplist(locationid):
     resp = Response(ret, status=200, mimetype='application/json')
     return resp
 
+@app.route('/dashboard/<locationid>')
+def api_dashboard(locationid):
+    try:
+        locid = int(locationid)
+    except:
+        return json.dumps({'error': 'Bad location ID'})
+
+    url = 'https://brewhound.sla.ac/taplist/{:d}'.format(locid)
+
+    r = urllib.urlopen(url)
+    data = json.load(r)
+
+    venue = data['location']['name']
+    beers = data['taplist']
+
+    return render_template('dashboard.html', venue=venue, beers=beers)
+
 if __name__ == '__main__':
     app.run()

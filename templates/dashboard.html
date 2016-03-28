@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+    <style type="text/css">
+    /* Clearfix hack begins */
+    .cf:before,
+    .cf:after {
+      content: " ";
+      /* 1 */
+      display: table;
+      /* 2 */
+    }
+    .cf:after {
+      clear: both;
+    }
+    /* Clearfix hack ends   */
+    #beer-list {
+      font-family: Arial, Helvetica, sans-serif;
+      background: white;
+      color: black;
+    }
+    #beer-list ul {
+      /* Reset everything to 0 for now */
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      float: left;
+    }
+    @media (max-width: 800px) {
+      #beer-list ul {
+        width: 100%;
+      }
+    }
+    @media (min-width: 801px) {
+      #beer-list ul {
+        width: 50%;
+      }
+    }
+    #beer-list ul li {
+      /* Reset everything to 0 for now */
+      list-style: none;
+      margin: 0;
+      height: 80px;
+      padding: 10px 0px 10px 80px;
+      background-repeat: no-repeat;
+      font-size: 12px;
+      /* Try to work around spliiting inside an element in columnar mode */
+      -webkit-column-break-inside: avoid;
+      -moz-column-break-inside: avoid;
+      -o-column-break-inside: avoid;
+      break-inside: avoid-column;
+      page-break-inside: avoid;
+    }
+    #beer-list ul li h2 {
+      font-size: 17px;
+      margin: 0;
+    }
+    #beer-list img.badge {
+      position: relative;
+      top: -18px;
+      float: left;
+      clear: left;
+      padding-right: 20px;
+    }
+    </style>
+</head>
+<body>
+    <main role="main">
+    <h2>Beers on at {{ venue }}</h3>
+    <section id="beer-list" class="cf">
+    {% for group in beers | slice(2) %}
+    <ul class="beer-list">
+        {% for beer in group %}
+        <li>
+            <img class="badge" src="{{ beer.badge }}" width="80" height="80" />
+            <h2>{{ beer.brewery }} <em>{{ beer.beer }}</em></h2>
+            {{ beer.style }} &mdash;
+            <strong>{{ beer.abv }} ABV</strong><br />
+        </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+    </section>
+    </main>
+</body>
+</html>
