@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<body>
+    <h2>Welcome to the unofficial brewhound API</h3>
+    <h2>API Docs</h2>
+    <ul>
+        <li>
+            <h3>taplist</h3>
+            <div>Lists everything on tap at a venue</div>
+            <div>URL: <strong>https://brewhound.sla.ac/taplist/<em>LOCATION_ID</em></strong></div>
+            <div>Response:
+<pre>
+{
+    location: { name, contact },
+    taplist: { brewery, beer, style, abv, badge }
+}
+</pre>
+            </div>
+        </li>
+    </ul>
+</body>
+</html>
